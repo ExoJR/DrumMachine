@@ -1,0 +1,70 @@
+@mixin Centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+@include Centered;
+  width: 100vw;
+  height: 100vh;
+
+  #root {
+    width: 100vw;
+    height: 100vh;
+    @include Centered;
+  }
+}
+
+#drum-machine {
+  @include Centered;
+  justify-content: space-between;
+  max-width:850px;
+  border: 2px black solid;
+  padding: 30px;
+  margin: 30px;
+
+  #drum-bank {
+    width: 100%;
+    @include Centered;
+    border: 1px blue solid;
+    margin-right: 15px;
+    flex-wrap: wrap;
+
+    .drum-pad{
+        @include Centered;
+        width: 100px;
+        height: 100px;
+        margin: 7px;
+        border-radius: 100%;
+        border: 1px solid blueviolet
+    }
+  }
+
+  #drum-control {
+    width: 100%;
+    border: 1px red solid;
+    margin-left: 15px
+  }
+}
+
+
+
+@media screen and (max-width: 842px) {
+    
+
+    body,
+    html { 
+      #root {
+        display: block;
+      }
+    }
+}
