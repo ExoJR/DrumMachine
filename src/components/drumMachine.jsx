@@ -16,14 +16,30 @@ function DrumMachine() {
           <div id='c' className='drum-pad'>C<audio id='C' className='clip' src=""></audio></div>
         </div>
         <div id="drum-control">
-        <div className='logo'></div>
+        <div className='logo'>Drum Machine</div>
         <div id='display'>
           <p id='display-text'></p>
         </div>
-        <div id='volume'></div>
+        <div id='volume'>
+          <p>Volume</p>
+          <input type="range" min={1} max={100}  />
+        </div>
         <div className='buttons'>
-          <div className='Power'></div>
-          <div className='Bank'></div>
+          <div className='Power'>
+            <p>Power</p>
+            <button class="button-30" role="button"></button>
+          </div>
+          <div className='Bank'>
+            <p>Bank</p>
+            <button class="button-30" role="button"></button>
+          </div>
+        </div>
+        <div className="speakers">
+          <hr />
+          <hr />
+          <hr />
+          <hr />
+          <hr />
         </div>
         </div>
       </div>

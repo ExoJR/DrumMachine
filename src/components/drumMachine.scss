@@ -1,8 +1,13 @@
+$color-1:rgb(243, 239, 9); 
+
+
+
 @mixin Centered {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 
 * {
@@ -16,7 +21,9 @@ html {
 @include Centered;
   width: 100vw;
   height: 100vh;
-
+  color: aliceblue;
+  background: orangered;
+  font-family: 'Workbench', sans-serif;
   #root {
     width: 100vw;
     height: 100vh;
@@ -28,14 +35,14 @@ html {
   @include Centered;
   justify-content: space-between;
   max-width:850px;
-  border: 2px black solid;
+  background-color: rgb(24, 23, 23);
   padding: 30px;
   margin: 30px;
+  border-radius: 10px;
 
   #drum-bank {
     width: 100%;
     @include Centered;
-    border: 1px blue solid;
     margin-right: 15px;
     flex-wrap: wrap;
 
@@ -45,26 +52,131 @@ html {
         height: 100px;
         margin: 7px;
         border-radius: 100%;
-        border: 1px solid blueviolet
+        border: 1px solid $color-1;
+        background: radial-gradient(#3f3e3e, #070707);
+        color: aliceblue;
     }
   }
 
   #drum-control {
     width: 100%;
-    border: 1px red solid;
-    margin-left: 15px
+    height: 100%;
+    margin-left: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+
+    .logo{
+      font-size: 30px;
+      margin-bottom: 30px;
+    };
+
+    #display{
+      width: 250px;
+      height: 40px;
+      background-color:$color-1;
+      margin-bottom: 30px;
+    }
+
+    #volume{
+      text-align: center;
+      margin-bottom: 20px;
+
+      p{
+        margin-bottom: 10px;
+      }
+    }
+
+    .buttons{
+      @include Centered;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+
+      p{
+        margin-bottom: 15px;
+      }
+    }
+    .speakers{
+      width: 100%;
+      @include Centered;
+      flex-direction: column;
+      hr{
+        width: calc(100% - 20px);
+        height: 10px;
+        margin-bottom: 10px;
+        border-color: #807878;
+        background: #5e5c5c75;
+      }
+    }
+    
   }
+
+// Class Button
+  
+.button-30 {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 18px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset; 
+}
+
+.button-30:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
 }
 
 
 
-@media screen and (max-width: 842px) {
-    
 
+
+@media screen and (max-width: 629px) {
+    
     body,
     html { 
       #root {
         display: block;
+      }
+
+      #drum-machine{
+        flex-direction: column-reverse;
       }
     }
 }
