@@ -10,27 +10,39 @@ import snareDrum from "../sounds/snare-drum.wav";
 import tomDrum from "../sounds/tom-drum.wav";
 import woodBlock from "../sounds/wood-block.wav";
 
-const playSound = (btnId) => {
-  const audioElement = document.getElementById(btnId);
-  if (audioElement) {
-    audioElement.currentTime = 0;
-    audioElement.play();
-  }
-};
-
-// const powerBtn = () => {
-// const Pbtn = document.getElementById('power-btn');
-// if (Pbtn.classList.contains('off')) {
-//   console.log('Elementul are clasa "my-class".');
-// } else {
-//   console.log('Elementul nu are clasa "my-class".');
-// }
-// }
-
 function DrumMachine() {
   const [soundsName, setSoundsName] = useState("");
+  const [btnPressed, setBtnPressed] = useState(true);
 
-  
+  const playSound = (btnId) => {
+    if (btnPressed) {
+      const audioElement = document.getElementById(btnId);
+      if (audioElement) {
+        audioElement.currentTime = 0;
+        audioElement.play();
+      }
+    } else {
+      console.log("Wrong");
+      setSoundsName("");
+    }
+  };
+
+  const toggleBtn = () => {
+    setBtnPressed(!btnPressed);
+    const display = document.getElementById("display");
+    const btns = document.querySelectorAll(".drum-pad");
+    if (btnPressed) {
+      display.style.background = "rgb(156, 154, 7)";
+      btns.forEach((btn) => {
+        btn.classList.add("power-off");
+      });
+    } else {
+      display.style.background = "yellow";
+      btns.forEach((btn) => {
+        btn.classList.remove("power-off");
+      });
+    }
+  };
 
   useEffect(() => {
     const pressKey = (event) => {
@@ -93,7 +105,7 @@ function DrumMachine() {
     return () => {
       document.removeEventListener("keydown", pressKey);
     };
-  }, []);
+  }, [btnPressed]);
 
   return (
     <div id="drum-machine">
@@ -115,8 +127,8 @@ function DrumMachine() {
           id="w"
           className="drum-pad"
           onClick={() => {
-            playSound("W");
             setSoundsName("kick-drum");
+            playSound("W");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -128,8 +140,8 @@ function DrumMachine() {
           id="e"
           className="drum-pad"
           onClick={() => {
-            playSound("E");
             setSoundsName("snare-drum");
+            playSound("E");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -141,8 +153,8 @@ function DrumMachine() {
           id="a"
           className="drum-pad"
           onClick={() => {
-            playSound("A");
             setSoundsName("hi-hat-closed");
+            playSound("A");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -154,8 +166,8 @@ function DrumMachine() {
           id="s"
           className="drum-pad"
           onClick={() => {
-            playSound("S");
             setSoundsName("tom-drum");
+            playSound("S");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -167,8 +179,8 @@ function DrumMachine() {
           id="d"
           className="drum-pad"
           onClick={() => {
-            playSound("D");
             setSoundsName("crash-cymbal");
+            playSound("D");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -180,8 +192,8 @@ function DrumMachine() {
           id="z"
           className="drum-pad"
           onClick={() => {
-            playSound("Z");
             setSoundsName("hi-hat-open");
+            playSound("Z");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -193,8 +205,8 @@ function DrumMachine() {
           id="x"
           className="drum-pad"
           onClick={() => {
-            playSound("X");
             setSoundsName("wood-block");
+            playSound("X");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -206,8 +218,8 @@ function DrumMachine() {
           id="c"
           className="drum-pad"
           onClick={() => {
-            playSound("C");
             setSoundsName("ride-cymbal");
+            playSound("C");
             setTimeout(() => {
               setSoundsName("");
             }, 1000);
@@ -228,7 +240,12 @@ function DrumMachine() {
         <div className="buttons">
           <div className="Power">
             <p>Power</p>
-            <button id="power-btn" className="button-30" role="button"></button>
+            <button
+              id="power-btn"
+              className="button-30"
+              role="button"
+              onClick={toggleBtn}
+            ></button>
           </div>
           <div className="Bank">
             <p>Bank</p>

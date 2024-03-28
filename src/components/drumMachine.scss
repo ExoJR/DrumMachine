@@ -1,5 +1,5 @@
 $color-1:rgb(243, 239, 9); 
-
+$color-2: rgb(156, 154, 7);
 
 
 @mixin Centered {
@@ -72,6 +72,16 @@ html {
       transform: scale(0.98) translateY(2px);
       box-shadow: yellow 1px 1px 4px 4px, yellow -1px -1px 4px 4px;
       color: aliceblue;
+    }
+
+    .drum-pad.power-off{
+      transform:unset;
+      box-shadow: unset;
+      border-color: $color-2;
+    }
+
+    .drum-pad.power-off:hover{
+      color: transparent;
     }
 
   }
