@@ -13,12 +13,14 @@ import woodBlock from "../sounds/wood-block.wav";
 function DrumMachine() {
   const [soundsName, setSoundsName] = useState("");
   const [btnPressed, setBtnPressed] = useState(true);
+  const [volume, setVolume] = useState('100');
 
   const playSound = (btnId) => {
     if (btnPressed) {
       const audioElement = document.getElementById(btnId);
       if (audioElement) {
         audioElement.currentTime = 0;
+        audioElement.volume = volume / 100;
         audioElement.play();
       }
     } else {
@@ -31,13 +33,19 @@ function DrumMachine() {
     setBtnPressed(!btnPressed);
     const display = document.getElementById("display");
     const btns = document.querySelectorAll(".drum-pad");
+    const volumeInput = document.getElementById("volume-input");
+
+
     if (btnPressed) {
       display.style.background = "rgb(156, 154, 7)";
+      setSoundsName('');
+      volumeInput.classList.add('power-off');
       btns.forEach((btn) => {
         btn.classList.add("power-off");
       });
     } else {
       display.style.background = "yellow";
+      volumeInput.classList.remove('power-off');
       btns.forEach((btn) => {
         btn.classList.remove("power-off");
       });
@@ -49,7 +57,7 @@ function DrumMachine() {
       const key = event.key;
       const button = document.getElementById(key);
 
-      if (button) {
+      if (button && btnPressed) {
         button.classList.add("pressed");
 
         setTimeout(() => {
@@ -58,6 +66,7 @@ function DrumMachine() {
         }, 100);
       }
 
+      if (btnPressed) {
       switch (event.key) {
         case "q":
           playSound("Q");
@@ -97,7 +106,7 @@ function DrumMachine() {
           break;
         default:
           break;
-      }
+      }}
     };
 
     document.addEventListener("keydown", pressKey);
@@ -105,7 +114,18 @@ function DrumMachine() {
     return () => {
       document.removeEventListener("keydown", pressKey);
     };
-  }, [btnPressed]);
+  }, [btnPressed,volume]);
+
+  const handleVolumeChange = (event) => {
+    const volumeInput = document.querySelector('#volume-input')
+    if(btnPressed){
+      setVolume(event.target.value);
+      setSoundsName(`${event.target.value}%`)  ;
+      volumeInput.classList.remove('power-off')
+    }else{
+      volumeInput.classList.add('power-off')
+    }
+  };
 
   return (
     <div id="drum-machine">
@@ -235,7 +255,7 @@ function DrumMachine() {
         </div>
         <div id="volume">
           <p>Volume</p>
-          <input type="range" min={1} max={100} />
+          <input id="volume-input" onChange={handleVolumeChange} value={volume} type="range" min={0} max={100} />
         </div>
         <div className="buttons">
           <div className="Power">
@@ -246,10 +266,6 @@ function DrumMachine() {
               role="button"
               onClick={toggleBtn}
             ></button>
-          </div>
-          <div className="Bank">
-            <p>Bank</p>
-            <button className="button-30" role="button"></button>
           </div>
         </div>
         <div className="speakers">

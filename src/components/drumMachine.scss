@@ -1,5 +1,7 @@
 $color-1:rgb(243, 239, 9); 
 $color-2: rgb(156, 154, 7);
+$color-3: rgb(255, 94, 0);
+$color-4: rgb(138, 61, 17);
 
 
 @mixin Centered {
@@ -194,6 +196,69 @@ html {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 200px;
+}
+
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color:$color-3;
+  border-radius: 0.5rem;
+  height: 10px;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  margin-top: -5px; 
+  background-color: #29c9a1;
+  border-radius: 0.5px;
+  height: 20px;
+  width: 10px;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 3px solid #1abeb1;
+  outline-offset: 0.125rem;
+}
+
+
+input[type="range"]::-moz-range-track {
+  background-color: #34e0d8;
+  border-radius: 0.5rem;
+  height: 10px;
+}
+
+
+input[type="range"]::-moz-range-thumb {
+  background-color: #43cfb8;
+  border: none;
+  border-radius: 0.5px;
+  height: 20px;
+  width: 10px;
+}
+
+input[type="range"]:focus::-moz-range-thumb{
+  outline: 3px solid #27b3d6;
+  outline-offset: 0.125rem;
+}
+input[type="range"].power-off::-webkit-slider-runnable-track {
+  background-color:$color-4;
+}
+
 }
 
 
